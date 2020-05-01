@@ -3,7 +3,16 @@ name = "ps2-mouse"
 version = "0.1.0"
 authors = ["Ryan Kennedy <rkennedy9064@gmail.com>"]
 edition = "2018"
-
+description = "This crate provides basic access to a ps2 mouse in x86 environments."
+documentation = "https://docs.rs/ps2-mouse"
+keywords = [
+    "x86_64",
+    "no_std",
+]
+categories = [
+    "no-std",
+]
+license = "MIT/Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
