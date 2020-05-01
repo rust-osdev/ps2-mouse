@@ -6,6 +6,8 @@ This crate provides a basic interface for interacting with a ps2 mouse.
 ## Basic Example
 ```rust
 use ps2_mouse::{Mouse, MouseState};
+use spinning_top::Spinlock;
+use x86_64::instructions::port::PortReadOnly;
 
 pub static MOUSE: Lazy<Spinlock<Mouse>> = Lazy::new(|| Spinlock::new(Mouse::new()));
 
