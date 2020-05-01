@@ -22,7 +22,7 @@ fn on_complete(mouse_state: MouseState) {
     println!("{:?}", mouse_state);
 }
 
-// An example interrupt based on [https://os.phil-opp.com/hardware-interrupts/]. The ps2 mouse is configured to fire
+// An example interrupt based on https://os.phil-opp.com/hardware-interrupts/. The ps2 mouse is configured to fire
 // interrupts at PIC offset 12.
 extern "x86-interrupt" fn mouse_interrupt_handler(_stack_frame: &mut InterruptStackFrame) {
     let mut port = PortReadOnly::new(0x60);
