@@ -12,15 +12,31 @@ const GET_STATUS_BYTE: u8 = 0x20;
 const SET_STATUS_BYTE: u8 = 0x60;
 
 bitflags! {
+    /// Represents the flags currently set for the mouse.
     #[derive(Default)]
     pub struct MouseFlags: u8 {
+        /// Whether or not the left mouse button is pressed.
         const LEFT_BUTTON = 0b0000_0001;
+
+        /// Whether or not the right mouse button is pressed.
         const RIGHT_BUTTON = 0b0000_0010;
+
+        /// Whether or not the middle mouse button is pressed.
         const MIDDLE_BUTTON = 0b0000_0100;
+
+        /// Whether or not the packet is valid or not.
         const ALWAYS_ONE = 0b0000_1000;
+
+        /// Whether or not the x delta is negative.
         const X_SIGN = 0b0001_0000;
+
+        /// Whether or not the y delta is negative.
         const Y_SIGN = 0b0010_0000;
+
+        /// Whether or not the x delta overflowed.
         const X_OVERFLOW = 0b0100_0000;
+
+        /// Whether or not the y delta overflowed.
         const Y_OVERFLOW = 0b1000_0000;
     }
 }
@@ -40,6 +56,12 @@ pub struct Mouse {
     current_state: MouseState,
     completed_state: MouseState,
     on_complete: Option<fn(MouseState)>,
+}
+
+impl Default for Mouse {
+    fn default() -> Mouse {
+        Mouse::new()
+    }
 }
 
 /// A snapshot of the mouse flags, x delta and y delta.
