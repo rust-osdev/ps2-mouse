@@ -14,7 +14,7 @@ pub static MOUSE: Lazy<Spinlock<Mouse>> = Lazy::new(|| Spinlock::new(Mouse::new(
 // Initialize the mouse and set the on complete event.
 fn init_mouse() {
     MOUSE.lock().init().unwrap();
-    MOUSE.lock().set_on_complete(test);
+    MOUSE.lock().set_on_complete(on_complete);
 }
 
 // This will be fired when a packet is finished being processed.
