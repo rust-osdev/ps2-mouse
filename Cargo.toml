@@ -1,6 +1,6 @@
 [package]
 name = "ps2-mouse"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ryan Kennedy <rkennedy9064@gmail.com>"]
 edition = "2018"
 description = "This crate provides basic access to a ps2 mouse in x86 environments."
