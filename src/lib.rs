@@ -2,6 +2,7 @@
 
 #![no_std]
 #![warn(missing_docs)]
+#![feature(const_fn)]
 
 use bitflags::bitflags;
 use x86_64::instructions::port::Port;
@@ -73,6 +74,15 @@ pub struct MouseState {
 }
 
 impl MouseState {
+    /// Returns a new `MouseState`.
+    pub const fn new() -> MouseState {
+        MouseState {
+            flags: MouseFlags::empty(),
+            x: 0,
+            y: 0,
+        }
+    }
+
     /// Returns true if the left mouse button is currently down.
     pub fn left_button_down(&self) -> bool {
         self.flags.contains(MouseFlags::LEFT_BUTTON)
@@ -107,17 +117,27 @@ impl MouseState {
     pub fn moved(&self) -> bool {
         self.x_moved() || self.y_moved()
     }
+
+    /// Returns the x delta of the mouse state.
+    pub fn get_x(&self) -> i16 {
+        self.x
+    }
+
+    /// Returns the y delta of the mouse state.
+    pub fn get_y(&self) -> i16 {
+        self.y
+    }
 }
 
 impl Mouse {
     /// Creates a new `Mouse`.
-    pub fn new() -> Mouse {
+    pub const fn new() -> Mouse {
         Mouse {
             command_port: Port::new(ADDRESS_PORT_ADDRESS),
             data_port: Port::new(DATA_PORT_ADDRESS),
             current_packet: 0,
-            current_state: MouseState::default(),
-            completed_state: MouseState::default(),
+            current_state: MouseState::new(),
+            completed_state: MouseState::new(),
             on_complete: None,
         }
     }
