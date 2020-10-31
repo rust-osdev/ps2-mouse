@@ -1,3 +1,7 @@
+# 0.1.3
+
+- Updated `x86_64` to `0.12.2`
+
 # 0.1.2
 
 - Updated `x86_64` to fix deprecated `asm!` macro.

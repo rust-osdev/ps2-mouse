@@ -1,6 +1,6 @@
 [package]
 name = "ps2-mouse"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Ryan Kennedy <rkennedy9064@gmail.com>"]
 edition = "2018"
 description = "This crate provides basic access to a ps2 mouse in x86 environments."
@@ -18,4 +18,4 @@ repository = "https://github.com/rust-osdev/ps2-mouse"
 
 [dependencies]
 bitflags = "1.2.1"
-x86_64 = "0.11.0"
+x86_64 = "0.12.2"
