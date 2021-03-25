@@ -18,4 +18,4 @@ repository = "https://github.com/rust-osdev/ps2-mouse"
 
 [dependencies]
 bitflags = "1.2.1"
-x86_64 = "0.12.2"
+x86_64 = "0.13"
