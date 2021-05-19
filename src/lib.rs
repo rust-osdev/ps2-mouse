@@ -2,7 +2,6 @@
 
 #![no_std]
 #![warn(missing_docs)]
-#![feature(const_fn)]
 #![feature(const_fn_fn_ptr_basics)]
 
 use bitflags::bitflags;
