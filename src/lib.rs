@@ -103,6 +103,16 @@ impl MouseState {
         !self.flags.contains(MouseFlags::RIGHT_BUTTON)
     }
 
+    /// Returns true if the middle mouse button is currently down.
+    pub fn middle_button_down(&self) -> bool {
+        self.flags.contains(MouseFlags::MIDDLE_BUTTON)
+    }
+
+    /// Returns true if the middle mouse button is currently up.
+    pub fn middle_button_up(&self) -> bool {
+        !self.flags.contains(MouseFlags::MIDDLE_BUTTON)
+    }
+
     /// Returns true if the x axis has moved.
     pub fn x_moved(&self) -> bool {
         self.x != 0
@@ -116,6 +126,11 @@ impl MouseState {
     /// Returns true if the x or y axis has moved.
     pub fn moved(&self) -> bool {
         self.x_moved() || self.y_moved()
+    }
+
+    /// Returns the flags of the mouse state.
+    pub fn get_flags(&self) -> MouseFlags {
+        self.flags
     }
 
     /// Returns the x delta of the mouse state.
@@ -281,6 +296,8 @@ mod test {
         MouseFlags::ALWAYS_ONE.bits() | MouseFlags::LEFT_BUTTON.bits();
     const RIGHT_MOUSE_BUTTON_DOWN_PACKET: u8 =
         MouseFlags::ALWAYS_ONE.bits() | MouseFlags::RIGHT_BUTTON.bits();
+    const MIDDLE_MOUSE_BUTTON_DOWN_PACKET: u8 =
+        MouseFlags::ALWAYS_ONE.bits() | MouseFlags::MIDDLE_BUTTON.bits();
     const POSITIVE_X_PACKET: u8 = 0x5;
     const POSITIVE_Y_PACKET: u8 = 0x8;
     const NEGATIVE_X_PACKET: u8 = 0xD8;
@@ -378,5 +395,19 @@ mod test {
         let mut mouse = Mouse::new();
         mouse.process_packet(VALID_PACKET);
         assert_eq!(mouse.current_state.right_button_up(), true);
+    }
+
+    #[test]
+    fn middle_mouse_button_down() {
+        let mut mouse = Mouse::new();
+        mouse.process_packet(MIDDLE_MOUSE_BUTTON_DOWN_PACKET);
+        assert_eq!(mouse.current_state.middle_button_down(), true);
+    }
+
+    #[test]
+    fn middle_mouse_button_up() {
+        let mut mouse = Mouse::new();
+        mouse.process_packet(VALID_PACKET);
+        assert_eq!(mouse.current_state.middle_button_up(), true);
     }
 }
