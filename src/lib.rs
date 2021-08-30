@@ -296,6 +296,8 @@ mod test {
         MouseFlags::ALWAYS_ONE.bits() | MouseFlags::LEFT_BUTTON.bits();
     const RIGHT_MOUSE_BUTTON_DOWN_PACKET: u8 =
         MouseFlags::ALWAYS_ONE.bits() | MouseFlags::RIGHT_BUTTON.bits();
+    const MIDDLE_MOUSE_BUTTON_DOWN_PACKET: u8 =
+        MouseFlags::ALWAYS_ONE.bits() | MouseFlags::MIDDLE_BUTTON.bits();
     const POSITIVE_X_PACKET: u8 = 0x5;
     const POSITIVE_Y_PACKET: u8 = 0x8;
     const NEGATIVE_X_PACKET: u8 = 0xD8;
@@ -393,5 +395,19 @@ mod test {
         let mut mouse = Mouse::new();
         mouse.process_packet(VALID_PACKET);
         assert_eq!(mouse.current_state.right_button_up(), true);
+    }
+
+    #[test]
+    fn middle_mouse_button_down() {
+        let mut mouse = Mouse::new();
+        mouse.process_packet(MIDDLE_MOUSE_BUTTON_DOWN_PACKET);
+        assert_eq!(mouse.current_state.middle_button_down(), true);
+    }
+
+    #[test]
+    fn middle_mouse_button_up() {
+        let mut mouse = Mouse::new();
+        mouse.process_packet(VALID_PACKET);
+        assert_eq!(mouse.current_state.middle_button_up(), true);
     }
 }
