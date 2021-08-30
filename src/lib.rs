@@ -103,6 +103,16 @@ impl MouseState {
         !self.flags.contains(MouseFlags::RIGHT_BUTTON)
     }
 
+    /// Returns true if the middle mouse button is currently down.
+    pub fn middle_button_down(&self) -> bool {
+        self.flags.contains(MouseFlags::MIDDLE_BUTTON)
+    }
+
+    /// Returns true if the middle mouse button is currently up.
+    pub fn middle_button_up(&self) -> bool {
+        !self.flags.contains(MouseFlags::MIDDLE_BUTTON)
+    }
+
     /// Returns true if the x axis has moved.
     pub fn x_moved(&self) -> bool {
         self.x != 0
@@ -116,6 +126,11 @@ impl MouseState {
     /// Returns true if the x or y axis has moved.
     pub fn moved(&self) -> bool {
         self.x_moved() || self.y_moved()
+    }
+
+    /// Returns the flags of the mouse state.
+    pub fn get_flags(&self) -> MouseFlags {
+        self.flags
     }
 
     /// Returns the x delta of the mouse state.
